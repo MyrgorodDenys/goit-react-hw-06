@@ -9,19 +9,18 @@ const contactsSlice = createSlice({
       reducer(state, action) {
         state.items.push(action.payload);
       },
-      prepare(values) {
+      prepare(item) {
         return {
           payload: {
-            ...values,
+            ...item,
             id: nanoid(),
           },
         };
       },
     },
     deleteContact: (state, action) => {
-      state.items = state.items.filter(
-        (contact) => contact.id !== action.payload
-      );
+      const index = state.items.findIndex((item) => item.id === action.payload);
+      state.items.splice(index, 1);
     },
   },
 });
