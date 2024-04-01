@@ -1,2 +1,2 @@
 export const selectNameFilter = (state) => state.filters.name;
-export const selectContacts = (state) => state.items;
+export const selectContacts = (state) => state.contacts.items;
