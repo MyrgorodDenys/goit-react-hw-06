@@ -8,13 +8,15 @@ const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const search = useSelector(selectNameFilter);
 
-  const filterContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(search.trim().toLowerCase())
-  );
+  const filterContacts = contacts
+    ? contacts.filter((contact) =>
+        contact.name.toLowerCase().includes(search.trim().toLowerCase())
+      )
+    : [];
 
   return (
     <>
-      {contacts.length !== 0 ? (
+      {contacts && contacts.length !== 0 ? (
         <ul className={css.listContacts}>
           {filterContacts.map((contact) => (
             <li className={css.itemContact} key={nanoid()}>
@@ -23,11 +25,11 @@ const ContactList = () => {
           ))}
         </ul>
       ) : (
-        <p className={css.infoText}>Your phonebook is empty 😢</p>
+        <p className={css.infoText}>Your phonebook is empty</p>
       )}
 
-      {!filterContacts.length && contacts.length !== 0 && (
-        <p className={css.infoText}>No contacts found 😢</p>
+      {!filterContacts.length && contacts && contacts.length !== 0 && (
+        <p className={css.infoText}>No contacts found</p>
       )}
     </>
   );
